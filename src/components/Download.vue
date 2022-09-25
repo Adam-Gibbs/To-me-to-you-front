@@ -17,18 +17,19 @@ const removePath = (path) => {
   const splitPath = path.split("/");
   return splitPath[splitPath.length - 1];
 };
-const checkExists = (id) => {
-  axios.get(`https://tometoyouapi/details/${id}`).then((res) => {
-    return true;
-  });
-  return false;
+const checkExists = async (id) => {
+  return axios
+    .get(`https://tometoyouapi.adamgibbs.dev/details/${id}`)
+    .then((res) => {
+      return res.status === 200;
+    });
 };
-const goToDownload = () => {
+const goToDownload = async () => {
   let path = document.getElementById("pathInput").value;
   path = removeSlash(path);
   const id = removePath(path);
-  if (checkExists(id)) {
-    router.push({ name: "download", params: { path } });
+  if (await checkExists(id)) {
+    router.push({ name: "download", params: { id } });
   }
 };
 </script>
