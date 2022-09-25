@@ -26,13 +26,14 @@ const toUpload = () => {
     <div
       class="flex items-center justify-between px-12 lg:px-40 py-5 bg-indigo-600 border-b-2 border-white"
     >
-      <div
+      <a
         class="grid grid-cols-3 items-center text-white text-4xl font-bold font-heading"
+        href="https://tometoyou.adamgibbs.dev/"
       >
         <em>To me</em>
         <img src="@/assets/images/WhiteLogo.svg" alt="" class="w-20 pl-5" />
         <em>To you</em>
-      </div>
+      </a>
       <div class="w-auto">
         <div class="flex flex-wrap items-center">
           <div class="w-auto">
