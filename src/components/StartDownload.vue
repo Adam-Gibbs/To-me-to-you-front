@@ -10,7 +10,7 @@ const filename = ref("");
 onMounted(() => {
   // axios request to /details
   axios
-    .get(`http://localhost:8080/details/${route.params.id}`)
+    .get(`http://tometoyouapi/details/${route.params.id}`)
     .then((res) => {
       // set filename to response data
       filename.value = res.data.fileName[0];
@@ -22,7 +22,7 @@ onMounted(() => {
 // method to download file
 const downloadFile = async () => {
   axios({
-    url: `http://localhost:8080/download/${route.params.id}`,
+    url: `http://tometoyouapi/download/${route.params.id}`,
     method: "GET",
     responseType: "blob",
   }).then((response) => {

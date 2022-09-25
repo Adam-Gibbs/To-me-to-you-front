@@ -55,8 +55,8 @@ const copy = () => {
       <h3
         class="text-indigo-700 text-4xl font-medium text-center underline mb-12"
       >
-        <a :href="`http://localhost:5173/${url}`">
-          http://localhost:5173/{{ url }}
+        <a :href="`http://tometoyou.adamgibbs.dev/${url}`">
+          http:///tometoyou.adamgibbs.dev/{{ url }}
         </a>
       </h3>
       <div class="w-full grid grid-cols-2">
