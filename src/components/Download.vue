@@ -18,7 +18,7 @@ const removePath = (path) => {
   return splitPath[splitPath.length - 1];
 };
 const checkExists = (id) => {
-  axios.get(`http://tometoyouapi/details/${id}`).then((res) => {
+  axios.get(`https://tometoyouapi/details/${id}`).then((res) => {
     return true;
   });
   return false;

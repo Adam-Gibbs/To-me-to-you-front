@@ -31,7 +31,9 @@ const clickUpload = () => {
   document.getElementById("uploadFile").click();
 };
 const copy = () => {
-  navigator.clipboard.writeText(url.value);
+  navigator.clipboard.writeText(
+    "https:///tometoyou.adamgibbs.dev/" + url.value
+  );
 };
 </script>
 
@@ -55,8 +57,8 @@ const copy = () => {
       <h3
         class="text-indigo-700 text-4xl font-medium text-center underline mb-12"
       >
-        <a :href="`http://tometoyou.adamgibbs.dev/${url}`">
-          http:///tometoyou.adamgibbs.dev/{{ url }}
+        <a :href="`https://tometoyou.adamgibbs.dev/${url}`">
+          https:///tometoyou.adamgibbs.dev/{{ url }}
         </a>
       </h3>
       <div class="w-full grid grid-cols-2">
