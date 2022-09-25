@@ -2,7 +2,7 @@
 import UploadService from "../services/UploadFilesService";
 import { ref } from "vue";
 
-const currentFile = ref(undefined);
+const uploading = ref(false);
 const progress = ref(0);
 const file = ref(undefined);
 const message = ref("");
@@ -10,21 +10,23 @@ const url = ref("");
 
 const upload = () => {
   progress.value = 0;
+  uploading.value = true;
 
-  currentFile.value = file.value.files[0];
-  UploadService.upload(currentFile.value, (event) => {
+  const currentFile = file.value.files[0];
+  UploadService.upload(currentFile, (event) => {
     progress.value = Math.round((100 * event.loaded) / event.total);
   })
     .then((response) => {
       message.value = response.data.message;
       url.value = response.data.url;
+      uploading.value = false;
     })
     .catch(() => {
       progress.value = 0;
       message.value = "Could not upload the file!";
+      uploading.value = false;
     });
 
-  currentFile.value = undefined;
   file.value = undefined;
 };
 const clickUpload = () => {
@@ -39,7 +41,14 @@ const copy = () => {
 
 <template>
   <section class="py-10 bg-white overflow-hidden" id="upload">
-    <div v-if="currentFile" class="container px-48 py-36 mx-auto">
+    <input
+      class="hidden"
+      id="uploadFile"
+      type="file"
+      ref="file"
+      @change="upload"
+    />
+    <div v-if="uploading" class="container px-48 py-36 mx-auto">
       <h2 class="text-6xl md:text-7xl font-bold font-heading text-center">
         Uploading
       </h2>
@@ -50,7 +59,7 @@ const copy = () => {
         ></div>
       </div>
     </div>
-    <div v-if="url" class="container px-48 py-36 mx-auto">
+    <div v-else-if="url" class="container px-48 py-36 mx-auto">
       <h2 class="text-6xl font-semibold font-heading text-center mb-12">
         This is the URL to download your file:
       </h2>
@@ -89,13 +98,6 @@ const copy = () => {
       class="container px-48 py-36 mx-auto border-dashed border-2 border-amber-800 rounded-xl"
     >
       <div class="text-center max-w-lg mx-auto">
-        <input
-          class="hidden"
-          id="uploadFile"
-          type="file"
-          ref="file"
-          @change="upload"
-        />
         <h2
           class="mb-16 text-6xl md:text-7xl font-bold font-heading text-center"
         >
